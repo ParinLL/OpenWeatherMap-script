@@ -14,7 +14,14 @@ export OPENWEATHER_API_KEY="your-api-key"
 CGO_ENABLED=0 go build -ldflags="-s -w" -o owget .
 ```
 
-Cross compile:
+Build for macOS (Apple Silicon / Intel):
+
+```bash
+GOOS=darwin GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o owget .
+GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w" -o owget .
+```
+
+Cross compile for Linux:
 
 ```bash
 GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o owget .
@@ -50,16 +57,22 @@ nerdctl.lima build -t owget .
 
 ```bash
 # Current weather (shortcut with coordinates)
-nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget 24.9575 121.5105
+owget 24.9575 121.5105
 
 # Current weather
-nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget weather 25.0287 121.5052
+owget weather 25.0287 121.5052
 
 # 5-day forecast
-nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget forecast 23.9938 120.5642
+owget forecast 23.9938 120.5642
 
 # Location search
-nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget geo Ankang,TW
+owget geo Ankang,TW
+```
+
+With nerdctl:
+
+```bash
+nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget 24.9575 121.5105
 ```
 
 ## Coordinates Quick Reference
