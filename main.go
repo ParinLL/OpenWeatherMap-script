@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -115,7 +116,7 @@ func parseLatLon(args []string) (float64, float64) {
 }
 
 func cmdGeo(apiKey, query string) {
-	url := fmt.Sprintf("%s?q=%s&limit=5&appid=%s", geoURL, query, apiKey)
+	url := fmt.Sprintf("%s?q=%s&limit=5&appid=%s", geoURL, url.QueryEscape(query), apiKey)
 	body := httpGet(url)
 
 	var results []GeoResult
@@ -131,8 +132,8 @@ func cmdGeo(apiKey, query string) {
 }
 
 func cmdCity(apiKey, query string, extra []string) {
-	url := fmt.Sprintf("%s?q=%s&limit=1&appid=%s", geoURL, query, apiKey)
-	body := httpGet(url)
+	reqURL := fmt.Sprintf("%s?q=%s&limit=1&appid=%s", geoURL, url.QueryEscape(query), apiKey)
+	body := httpGet(reqURL)
 
 	var results []GeoResult
 	mustUnmarshal(body, &results)

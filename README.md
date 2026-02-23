@@ -73,12 +73,19 @@ owget city Taipei,TW forecast
 
 # Location search
 owget geo Ankang,TW
+
+# City names with spaces
+owget geo "New York,US"
+owget city "New York,US"
+owget city "New York,NY,US" forecast
 ```
 
 With nerdctl:
 
 ```bash
-nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget 24.9575 121.5105
+nerdctl.lima run --rm -e OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY owget 24.9575 121.5105
+nerdctl.lima run --rm -e OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY owget geo "New York,US"
+nerdctl.lima run --rm -e OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY owget city "New York,NY,US"
 ```
 
 ## Coordinates Quick Reference
@@ -88,6 +95,7 @@ nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget 24.9575 121.5105
 | Xindian Ankang | 24.9575 | 121.5105 |
 | Taipei Zhonghua Rd | 25.0287 | 121.5052 |
 | Changhua Dacun | 23.9938 | 120.5642 |
+| New York, US | 40.7127 | -74.0060 |
 
 ## API Notes
 
