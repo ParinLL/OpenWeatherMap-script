@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	GeoURL      = "http://api.openweathermap.org/geo/1.0/direct"
+	GeoURL      = "https://api.openweathermap.org/geo/1.0/direct"
 	WeatherURL  = "https://api.openweathermap.org/data/2.5/weather"
 	ForecastURL = "https://api.openweathermap.org/data/2.5/forecast"
 )
