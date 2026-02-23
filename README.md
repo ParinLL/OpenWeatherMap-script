@@ -1,0 +1,80 @@
+# owget — OpenWeatherMap CLI
+
+A weather CLI written in Go. Supports geocoding, current weather, and 5-day forecast.
+
+## Environment Variable
+
+```bash
+export OPENWEATHER_API_KEY="your-api-key"
+```
+
+## Build (native Go)
+
+```bash
+CGO_ENABLED=0 go build -ldflags="-s -w" -o owget .
+```
+
+Cross compile:
+
+```bash
+GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -o owget .
+GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w" -o owget .
+```
+
+Install to PATH:
+
+```bash
+sudo install owget /usr/local/bin/
+```
+
+Or via `go install`:
+
+```bash
+go install .
+# binary goes to $GOPATH/bin/owget (make sure $GOPATH/bin is in your PATH)
+```
+
+## Build (nerdctl + Lima, multi-arch)
+
+```bash
+nerdctl.lima build --platform linux/arm64,linux/amd64 -t owget .
+```
+
+Single platform:
+
+```bash
+nerdctl.lima build -t owget .
+```
+
+## Usage
+
+```bash
+# Current weather (shortcut with coordinates)
+nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget 24.9575 121.5105
+
+# Current weather
+nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget weather 25.0287 121.5052
+
+# 5-day forecast
+nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget forecast 23.9938 120.5642
+
+# Location search
+nerdctl.lima run --rm -e OPENWEATHER_API_KEY owget geo Ankang,TW
+```
+
+## Coordinates Quick Reference
+
+| Location | lat | lon |
+|----------|-----|-----|
+| Xindian Ankang | 24.9575 | 121.5105 |
+| Taipei Zhonghua Rd | 25.0287 | 121.5052 |
+| Changhua Dacun | 23.9938 | 120.5642 |
+
+## API Notes
+
+Uses the OpenWeatherMap free tier:
+- Geocoding: `geo/1.0/direct`
+- Current Weather: `data/2.5/weather`
+- 5-Day Forecast: `data/2.5/forecast`
+
+OneCall 3.0 requires a paid subscription and is not used by this tool.
