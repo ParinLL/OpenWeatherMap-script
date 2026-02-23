@@ -81,6 +81,11 @@ func main() {
 			fatal("usage: owget geo <City>[,<Country>]")
 		}
 		cmdGeo(apiKey, os.Args[2])
+	case "city":
+		if len(os.Args) < 3 {
+			fatal("usage: owget city <City>[,<Country>] [forecast]")
+		}
+		cmdCity(apiKey, os.Args[2], os.Args[3:])
 	case "weather":
 		lat, lon := parseLatLon(os.Args[2:])
 		cmdWeather(apiKey, lat, lon)
@@ -124,6 +129,28 @@ func cmdGeo(apiKey, query string) {
 		fmt.Printf("📍 %s, %s  (lat=%.4f, lon=%.4f)\n", r.Name, r.Country, r.Lat, r.Lon)
 	}
 }
+
+func cmdCity(apiKey, query string, extra []string) {
+	url := fmt.Sprintf("%s?q=%s&limit=1&appid=%s", geoURL, query, apiKey)
+	body := httpGet(url)
+
+	var results []GeoResult
+	mustUnmarshal(body, &results)
+
+	if len(results) == 0 {
+		fatal("city not found: " + query)
+	}
+
+	r := results[0]
+	fmt.Printf("📍 %s, %s  (lat=%.4f, lon=%.4f)\n\n", r.Name, r.Country, r.Lat, r.Lon)
+
+	if len(extra) > 0 && extra[0] == "forecast" {
+		cmdForecast(apiKey, r.Lat, r.Lon)
+	} else {
+		cmdWeather(apiKey, r.Lat, r.Lon)
+	}
+}
+
 
 func cmdWeather(apiKey string, lat, lon float64) {
 	url := fmt.Sprintf("%s?lat=%.4f&lon=%.4f&units=metric&appid=%s", weatherURL, lat, lon, apiKey)
@@ -202,6 +229,9 @@ Usage:
   owget <lat> <lon>                  Current weather (shortcut)
   owget weather <lat> <lon>          Current weather
   owget forecast <lat> <lon>         5-day / 3-hour forecast
+  owget city <City>[,<Country>]      Current weather by city name
+  owget city <City>[,<Country>] forecast
+                                     5-day forecast by city name
   owget geo <City>[,<Country>]       Search location
 
 Env:
@@ -210,6 +240,8 @@ Env:
 Examples:
   owget 24.9575 121.5105
   owget forecast 25.0287 121.5052
+  owget city Taipei,TW
+  owget city Taipei,TW forecast
   owget geo Ankang,TW
 `)
 	os.Exit(1)

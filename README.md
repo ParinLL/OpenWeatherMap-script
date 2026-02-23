@@ -65,6 +65,12 @@ owget weather 25.0287 121.5052
 # 5-day forecast
 owget forecast 23.9938 120.5642
 
+# Current weather by city name
+owget city Taipei,TW
+
+# 5-day forecast by city name
+owget city Taipei,TW forecast
+
 # Location search
 owget geo Ankang,TW
 ```
