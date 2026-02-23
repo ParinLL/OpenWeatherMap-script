@@ -76,8 +76,21 @@ owget geo Ankang,TW
 
 # City names with spaces
 owget geo "New York,US"
-owget city "New York,US"
+owget city "New York,NY,US"
 owget city "New York,NY,US" forecast
+```
+
+### Flags
+
+```bash
+# Show detailed weather info (pressure, wind dir, sunrise/sunset, visibility, etc.)
+owget weather Taipei,TW --detail
+
+# Show HTTP request/response for debugging
+owget geo "New York,US" --debug
+
+# Combine both
+owget city "New York,NY,US" --detail --debug
 ```
 
 With nerdctl:
