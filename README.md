@@ -56,7 +56,7 @@ nerdctl.lima build -t owget .
 ## Usage
 
 ```bash
-# Current weather (shortcut with coordinates)
+# Current weather (shortcut with Favourites)
 owget 24.9575 121.5105
 
 # Current weather
@@ -101,7 +101,7 @@ nerdctl.lima run --rm -e OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY owget geo "New
 nerdctl.lima run --rm -e OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY owget city "New York,NY,US"
 ```
 
-## Coordinates Quick Reference
+## Favourites Quick Reference
 
 | Location | lat | lon |
 |----------|-----|-----|
