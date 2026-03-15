@@ -116,5 +116,6 @@ Uses the OpenWeatherMap free tier:
 - Geocoding: `geo/1.0/direct`
 - Current Weather: `data/2.5/weather`
 - 5-Day Forecast: `data/2.5/forecast`
+- Official Current Weather API docs: https://openweathermap.org/current?collection=current_forecast
 
 OneCall 3.0 requires a paid subscription and is not used by this tool.
