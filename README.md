@@ -6,11 +6,10 @@ A weather CLI written in Go. Supports geocoding, current weather, and 5-day fore
 
 This skill is available on ClawHub and can be installed in OpenClaw.
 
-- ClawHub: https://clawhub.com
-- Search: https://clawhub.com/search?q=openweathermap-cli
+- ClawHub page: https://clawhub.ai/ParinLL/openweather-cli
 
 ```bash
-clawhub install openweathermap-cli
+clawhub install openweather-cli
 ```
 
 ## Environment Variable

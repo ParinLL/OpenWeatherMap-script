@@ -1,5 +1,5 @@
 ---
-name: openweathermap-cli
+name: openweather-cli
 description: Use this skill when the user wants to run, troubleshoot, or extend the owget CLI for geocoding, current weather, and 5-day forecasts with OpenWeatherMap.
 homepage: https://github.com/ParinLL/OpenWeatherMap-script
 metadata: {"openclaw":{"homepage":"https://github.com/ParinLL/OpenWeatherMap-script","requires":{"env":["OPENWEATHER_API_KEY"],"binaries":["go"]},"primaryEnv":"OPENWEATHER_API_KEY"}}
