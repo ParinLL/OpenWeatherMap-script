@@ -88,6 +88,7 @@ owget weather Taipei,TW --detail
 
 # Show HTTP request/response for debugging
 owget geo "New York,US" --debug
+# API credentials in debug request URLs are redacted automatically
 
 # Combine both
 owget city "New York,NY,US" --detail --debug

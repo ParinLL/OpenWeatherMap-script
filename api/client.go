@@ -30,7 +30,7 @@ func EncodeQuery(query string) string {
 
 func HTTPGet(reqURL string) []byte {
 	if Debug {
-		fmt.Fprintf(os.Stderr, "[DEBUG] GET %s\n", reqURL)
+		fmt.Fprintf(os.Stderr, "[DEBUG] GET %s\n", RedactURLCredentials(reqURL))
 	}
 	resp, err := http.Get(reqURL)
 	if err != nil {
@@ -51,6 +51,22 @@ func HTTPGet(reqURL string) []byte {
 		Fatal(fmt.Sprintf("API %d: %s", resp.StatusCode, string(body)))
 	}
 	return body
+}
+
+// RedactURLCredentials masks sensitive query params in debug logs.
+func RedactURLCredentials(raw string) string {
+	u, err := url.Parse(raw)
+	if err != nil {
+		return raw
+	}
+	q := u.Query()
+	for _, key := range []string{"appid", "api_key", "apikey", "token", "access_token"} {
+		if _, ok := q[key]; ok {
+			q.Set(key, "[REDACTED]")
+		}
+	}
+	u.RawQuery = q.Encode()
+	return u.String()
 }
 
 func Unmarshal(data []byte, v any) {
