@@ -2,7 +2,7 @@
 name: openweathermap-cli
 description: Use this skill when the user wants to run, troubleshoot, or extend the owget CLI for geocoding, current weather, and 5-day forecasts with OpenWeatherMap.
 homepage: https://github.com/ParinLL/OpenWeatherMap-script
-metadata: {"openclaw":{"homepage":"https://github.com/ParinLL/OpenWeatherMap-script","requires":{"env":["OPENWEATHER_API_KEY"]},"primaryEnv":"OPENWEATHER_API_KEY"}}
+metadata: {"openclaw":{"homepage":"https://github.com/ParinLL/OpenWeatherMap-script","requires":{"env":["OPENWEATHER_API_KEY"],"binaries":["go"]},"primaryEnv":"OPENWEATHER_API_KEY"}}
 ---
 
 # OpenWeatherMap CLI Skill
@@ -23,14 +23,20 @@ Use this skill for tasks related to the `owget` command in this repository.
 ```bash
 git clone git@github.com:ParinLL/OpenWeatherMap-script.git
 cd OpenWeatherMap-script
-CGO_ENABLED=0 go build -ldflags="-s -w" -o owget .
-sudo install owget /usr/local/bin/
+go install .
 ```
 
 Set API key:
 
 ```bash
 export OPENWEATHER_API_KEY="your-api-key"
+```
+
+Optional system-wide install (requires `sudo`):
+
+```bash
+CGO_ENABLED=0 go build -ldflags="-s -w" -o owget .
+sudo install owget /usr/local/bin/
 ```
 
 ## When To Use
