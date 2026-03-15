@@ -5,9 +5,9 @@ homepage: https://github.com/ParinLL/OpenWeatherMap-script
 metadata: {"openclaw":{"homepage":"https://github.com/ParinLL/OpenWeatherMap-script","requires":{"env":["OPENWEATHER_API_KEY"],"binaries":["go"]},"primaryEnv":"OPENWEATHER_API_KEY"}}
 ---
 
-# OpenWeatherMap CLI Skill
+# OpenWeather CLI Skill
 
-Instruction-only skill document for using and troubleshooting `owget` (OpenWeatherMap CLI).
+Instruction-only skill document for using and troubleshooting `owget` (OpenWeather CLI).
 
 ## Skill Purpose and Trigger Scenarios
 
